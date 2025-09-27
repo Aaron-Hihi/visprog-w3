@@ -163,6 +163,8 @@ fun ClickerView() {
                     ),
                 contentAlignment = Alignment.Center
             ) {
+
+                // Top box layout
                 Column (
                   modifier = Modifier 
                       .padding(24.dp),
@@ -170,17 +172,21 @@ fun ClickerView() {
                     verticalArrangement = Arrangement.spacedBy(10.dp)
 
                 ) {
+
+                    // Title
                     Text (
                         text = "Your Coins",
                         style = header2Style
                     )
 
+                    // Coin amount
                     Text (
                         text = "${coin.toLong()}",
                         style = headerStyle,
                         color = green
                     )
 
+                    // +coin per click
                     Text (
                         text = "${twoPoints.format(clickValue)} coins per tap",
                         style = normalStyle
@@ -194,11 +200,13 @@ fun ClickerView() {
                 verticalArrangement = Arrangement.spacedBy(12.dp)
             ) {
 
+                // Title
                 Text (
                     text = "Tap the Cat!",
                     style = header3Style
                 )
 
+                // Tap here
                 Image (
                     painter = if (isClicked) painterResource(R.drawable.clicked)
                               else painterResource(R.drawable.unclicked),
@@ -215,6 +223,7 @@ fun ClickerView() {
                         )
                 )
 
+                // Subtitle
                 Text (
                     text = if(isClicked) "Meow!"
                            else "Purr~",
@@ -231,6 +240,8 @@ fun ClickerView() {
                     ),
                 contentAlignment = Alignment.Center
             ) {
+
+                // Layout for bottom coin
                 Column (
                     modifier = Modifier
                         .padding(24.dp),
@@ -238,18 +249,22 @@ fun ClickerView() {
                     verticalArrangement = Arrangement.spacedBy(10.dp)
 
                 ) {
+
+                    // Title
                     Text (
                         text = "Give Me Your Coin",
                         style = header2Style,
                         color = Color.Black
                     )
 
+                    // Next upgrade info
                     Text (
                         text = "Next upgrade: +${twoPoints.format((clickValue * clickUpgradeMultiplier) - clickValue)} coins per tap",
                         style = normalStyle,
                         color = Color.Black
                     )
 
+                    // Upgrade button
                     Box (
                         modifier = Modifier
                             .fillMaxWidth()
@@ -267,6 +282,7 @@ fun ClickerView() {
                                 }
                             )
                     ) {
+                        // Upgrade text
                         Text (
                             text = if (enoughCoin) "Pay for ${upgradePrice.toLong()} coins"
                                    else "Find ${(upgradePrice - coin).toLong()} more coins",
@@ -279,7 +295,6 @@ fun ClickerView() {
 
                 }
             }
-
         }
     }
 
@@ -308,4 +323,3 @@ fun ClickerPreview() {
 fun enoughCoin(coin: Double, upgradePrice: Double): Boolean {
     return coin >= upgradePrice
 }
-
