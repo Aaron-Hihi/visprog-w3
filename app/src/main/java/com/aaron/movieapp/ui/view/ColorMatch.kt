@@ -192,6 +192,7 @@ fun ColorMatchView() {
                         alignment = Alignment.CenterVertically, space = 48.dp),
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
+                    
                     // Title Text
                     Column (
                         horizontalAlignment = Alignment.CenterHorizontally
@@ -228,6 +229,7 @@ fun ColorMatchView() {
                             ),
 
                     ) {
+                        // Button text
                         Text (
                             text = "Start Game",
                             style = normalStyle
@@ -238,6 +240,7 @@ fun ColorMatchView() {
             }
 
             State.COUNTDOWN -> {
+                // Simply the countdown text
                 Text (
                     text = countDownText,
                     style = headerStyle
@@ -262,11 +265,13 @@ fun ColorMatchView() {
                         verticalAlignment = Alignment.CenterVertically,
                         horizontalArrangement = Arrangement.SpaceBetween
                     ) {
+                        // Mode
                         Text (
                             text = "Mode: ${question.mode}",
                             style = normalStyle
                         )
 
+                        // Correct vs Wrong
                         Text (
                             text = "✅ $correctAmount     ❌ $wrongAmount/$maxWrongAmount",
                             style = normalStyle
@@ -281,11 +286,13 @@ fun ColorMatchView() {
                             alignment = Alignment.CenterVertically, space = 24.dp),
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
+                        // Timer
                         Text (
                             text = "$questionTimerText s",
                             style = normalStyle
                         )
 
+                        // Question
                         Text (
                             text = question.text.colorName,
                             style = headerStyle,
@@ -438,6 +445,8 @@ fun ColorMatchView() {
                             ),
 
                         ) {
+
+                        // Button text
                         Text (
                             text = "Restart Game",
                             style = normalStyle
@@ -564,10 +573,12 @@ private fun generateQuestion(): Question {
     return Question(mode, text, color, leftChoice, rightChoice, correctAnswer)
 }
 
-private fun isGameOver(currentWrongs: Int, maxWrongs: Int): Boolean {
-    return currentWrongs >= maxWrongs
+// gameover if wrong is equal or more than maxWrong
+private fun isGameOver(currentWrongs: Int, maxWrong: Int): Boolean {
+    return currentWrongs >= maxWrong
 }
 
+// check if answer is correct
 private fun checkAnswer(answer: Choice, question: Question): Boolean {
     return answer == question.correctAnswer
 }
