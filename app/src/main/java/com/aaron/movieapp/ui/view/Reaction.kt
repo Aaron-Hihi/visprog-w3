@@ -163,6 +163,7 @@ fun ReactionView() {
      */
 
     LaunchedEffect(screen) {
+        // Randomize how long will the clickNow screen appears
         when (screen) {
             "GetReadyScreen" -> {
                 delay((500..4500).random().toLong())
@@ -177,7 +178,7 @@ fun ReactionView() {
     // Background
     when (screen) {
         "StartScreen" -> {
-            // Reset array
+            // Reset array, initialize
             var i = 0
             while(!trialResults.isNullOrEmpty()) {
                 trialResults.removeAt(i)
@@ -185,6 +186,7 @@ fun ReactionView() {
 
             currentTrial = 0
 
+            // Background
             Box (
                 modifier = Modifier.background(
                     color = lightBlue
@@ -209,11 +211,13 @@ fun ReactionView() {
                         .padding(vertical = 48.dp, horizontal = 36.dp)
 
                 ) {
+                    // Reaction Title
                     Text(
                         text = "Reaction",
                         style = headerStyle
                     )
 
+                    // Reaction Logo
                     Icon(
                         imageVector = Icons.Default.FlashOn,
                         contentDescription = "Get Ready",
@@ -222,11 +226,13 @@ fun ReactionView() {
                             .size(120.dp)
                     )
 
+                    // Subtitle
                     Text(
                         text = "Test",
                         style = normalStyle
                     )
 
+                    // Click to start
                     Text(
                         text = "Click to start",
                         style = normalStyle
@@ -237,6 +243,7 @@ fun ReactionView() {
         }
 
         "GetReadyScreen" -> {
+            // Background
             Box (
                 modifier = Modifier.background(
                     color = gray
@@ -261,11 +268,13 @@ fun ReactionView() {
                         .padding(vertical = 48.dp, horizontal = 36.dp)
 
                 ) {
+                    // Title
                     Text (
                         text = "Get Ready",
                         style = headerStyle
                     )
 
+                    // Wait icon
                     Icon (
                         imageVector = Icons.Default.Warning,
                         contentDescription = "Get Ready",
@@ -274,11 +283,13 @@ fun ReactionView() {
                             .size(120.dp)
                     )
 
+                    // Subtitle
                     Text (
                         text = "Wait for green light...",
                         style = normalStyle
                     )
 
+                    // Subtitle
                     Text (
                         text = "DON'T CLICK YET",
                         style = normalStyle
@@ -289,6 +300,7 @@ fun ReactionView() {
         }
 
         "ClickNowScreen" -> {
+            // Background
             Box (
                 modifier = Modifier.background(
                     color = green
@@ -318,11 +330,13 @@ fun ReactionView() {
                         .padding(vertical = 48.dp, horizontal = 36.dp)
 
                 ) {
+                    // Title
                     Text (
                         text = "GO!",
                         style = headerStyle
                     )
 
+                    // Run Icon
                     Icon (
                         imageVector = Icons.AutoMirrored.Filled.DirectionsRun,
                         contentDescription = "CLICK NOW!",
@@ -331,11 +345,13 @@ fun ReactionView() {
                             .size(120.dp)
                     )
 
+                    // Subtitle
                     Text (
                         text = "CLICK NOW!",
                         style = normalStyle
                     )
 
+                    // Subtitle
                     Text (
                         text = "TAP AS FAST AS YOU CAN!",
                         style = normalStyle
@@ -346,6 +362,7 @@ fun ReactionView() {
         }
 
         "TrialFinishedScreen" -> {
+            // Background
             Box (
                 modifier = Modifier.background(
                     color = green
@@ -361,6 +378,8 @@ fun ReactionView() {
                         }
                     )
             ) {
+
+                // Layout
                 Column(
                     horizontalAlignment = Alignment.CenterHorizontally,
                     verticalArrangement = Arrangement.spacedBy(
@@ -372,11 +391,13 @@ fun ReactionView() {
                         .padding(vertical = 48.dp, horizontal = 36.dp)
 
                 ) {
+                    // Title
                     Text (
                         text = "Trial $currentTrial Complete!",
                         style = headerStyle
                     )
 
+                    // Complete icon
                     Icon (
                         imageVector = Icons.Default.CheckCircle,
                         contentDescription = "Complete",
@@ -385,17 +406,20 @@ fun ReactionView() {
                             .size(120.dp)
                     )
 
+                    // Subtitle - reaction time
                     Text (
                         text = "Time: ${reactionTime}ms",
                         style = normalStyle
                     )
 
+                    // Subtitle - continue
                     Text (
                         text = if (currentTrial < trialAttempts) "Continue to Trial ${currentTrial + 1}"
                             else "Continue to results",
                         style = normalStyle
                     )
 
+                    // Time records
                     Box (
                         modifier = Modifier
                             .padding(horizontal = 12.dp)
@@ -411,35 +435,46 @@ fun ReactionView() {
                             ),
                     ) {
 
+                        // Layout for time records
                         Column (
                             modifier = Modifier
                                 .padding(all = 20.dp),
                             horizontalAlignment = Alignment.CenterHorizontally,
                             verticalArrangement = Arrangement.spacedBy(12.dp)
                         ) {
+
+                            // Title
                             Text (
                                 text = "Trial Results",
                                 color = finalBlue,
                                 style = header2Style
                             )
 
+                            // All the times
                             Row (
                                 modifier = Modifier
                                     .fillMaxWidth(),
                                 horizontalArrangement = Arrangement.SpaceEvenly
                             ) {
+
+                                // Using loop so it can display multiple times, even >3
                                 var counter = 0
                                 for (trialTime in trialResults) {
+
+                                    // Layout
                                     Column (
                                         //modifier = Modifier.fillMaxWidth(),
                                         horizontalAlignment = Alignment.CenterHorizontally
                                     ) {
+
+                                        // Trial #
                                         Text (
                                             text = "${counter + 1}",
                                             style = header3Style,
                                             color = finalGreen
                                         )
 
+                                        // Trial time
                                         Text (
                                             text = "${trialTime}ms",
                                             style = normalStyle,
@@ -452,14 +487,12 @@ fun ReactionView() {
                             }
                         }
                     }
-
-
-
                 }
             }
         }
 
         "TrialFailedScreen" -> {
+            // Background
             Box (
                 modifier = Modifier.background(
                     color = red
@@ -471,6 +504,8 @@ fun ReactionView() {
                         }
                     )
             ) {
+
+                // Layout
                 Column(
                     horizontalAlignment = Alignment.CenterHorizontally,
                     verticalArrangement = Arrangement.spacedBy(
@@ -482,11 +517,14 @@ fun ReactionView() {
                         .padding(vertical = 48.dp, horizontal = 36.dp)
 
                 ) {
+
+                    // Title
                     Text (
                         text = "FAIL!",
                         style = headerStyle
                     )
 
+                    // Fail icon
                     Icon (
                         imageVector = Icons.Default.ThumbDown,
                         contentDescription = "Fail",
@@ -495,16 +533,19 @@ fun ReactionView() {
                             .size(120.dp)
                     )
 
+                    // Subtitle
                     Text (
                         text = "You clicked too early. TRY TO READ THE RULE BRO",
                         style = normalStyle
                     )
 
+                    // Subtitle
                     Text (
                         text = "TRY AGAIN",
                         style = normalStyle
                     )
 
+                    // Background for time record
                     Box (
                         modifier = Modifier
                             .padding(horizontal = 12.dp)
@@ -520,35 +561,43 @@ fun ReactionView() {
                             ),
                     ) {
 
+                        // Layout for time record
                         Column (
                             modifier = Modifier
                                 .padding(all = 20.dp),
                             horizontalAlignment = Alignment.CenterHorizontally,
                             verticalArrangement = Arrangement.spacedBy(12.dp)
                         ) {
+                            // Title
                             Text (
                                 text = "Trial Results",
                                 color = finalBlue,
                                 style = header2Style
                             )
 
+                            // All the times
                             Row (
                                 modifier = Modifier
                                     .fillMaxWidth(),
                                 horizontalArrangement = Arrangement.SpaceEvenly
                             ) {
+                                // Using loop so it can display multiple times, even >3
                                 var counter = 0
                                 for (trialTime in trialResults) {
+
+                                    // Layout for time records
                                     Column (
                                         //modifier = Modifier.fillMaxWidth(),
                                         horizontalAlignment = Alignment.CenterHorizontally
                                     ) {
+                                        // Trial #
                                         Text (
                                             text = "${counter + 1}",
                                             style = header3Style,
                                             color = finalGreen
                                         )
 
+                                        // Trial time
                                         Text (
                                             text = "${trialTime}ms",
                                             style = normalStyle,
@@ -561,14 +610,12 @@ fun ReactionView() {
                             }
                         }
                     }
-
-
-
                 }
             }
         }
 
         "StartAfterTrialScreen" -> {
+            // Background
             Box (
                 modifier = Modifier.background(
                     color = lightBlue
@@ -593,11 +640,14 @@ fun ReactionView() {
                         .padding(vertical = 48.dp, horizontal = 36.dp)
 
                 ) {
+
+                    // Title
                     Text(
                         text = "Reaction",
                         style = headerStyle
                     )
 
+                    // Reaction Icon
                     Icon(
                         imageVector = Icons.Default.FlashOn,
                         contentDescription = "Get Ready",
@@ -606,16 +656,19 @@ fun ReactionView() {
                             .size(120.dp)
                     )
 
+                    // Subtitle
                     Text(
                         text = "Test",
                         style = normalStyle
                     )
 
+                    // Subtitle
                     Text(
                         text = "Click to start",
                         style = normalStyle
                     )
 
+                    // Background for all time records
                     Box (
                         modifier = Modifier
                             .padding(horizontal = 12.dp)
@@ -631,35 +684,46 @@ fun ReactionView() {
                             ),
                     ) {
 
+                        // Layout for all time records
                         Column(
                             modifier = Modifier
                                 .padding(all = 20.dp),
                             horizontalAlignment = Alignment.CenterHorizontally,
                             verticalArrangement = Arrangement.spacedBy(12.dp)
                         ) {
+
+                            // Title
                             Text(
                                 text = "Trial Results",
                                 color = finalBlue,
                                 style = header2Style
                             )
 
+                            // All the times
                             Row(
                                 modifier = Modifier
                                     .fillMaxWidth(),
                                 horizontalArrangement = Arrangement.SpaceEvenly
                             ) {
+
+                                // Using loop so it can display multiple times, even >3
                                 var counter = 0
                                 for (trialTime in trialResults) {
+
+                                    // Layout per trial
                                     Column (
                                         //modifier = Modifier.fillMaxWidth(),
                                         horizontalAlignment = Alignment.CenterHorizontally
                                     ) {
+
+                                        // Trial #
                                         Text(
                                             text = "${counter + 1}",
                                             style = header3Style,
                                             color = finalGreen
                                         )
 
+                                        // Trial time
                                         Text(
                                             text = "${trialTime}ms",
                                             style = normalStyle,
@@ -685,6 +749,7 @@ fun ReactionView() {
             }
             trialAverage = (totalTime.toDouble() / trialAttempts).toLong()
 
+            // Background
             Box (
                 modifier = Modifier.background( // 180 250 450
                     color = if (trialAverage < 180) finalGreen
@@ -712,6 +777,7 @@ fun ReactionView() {
                         .padding(vertical = 48.dp, horizontal = 36.dp)
 
                 ) {
+                    // Text based on result
                     Text(
                         text = if (trialAverage < 180) "DANG YOU ARE SO FAST BRO!"
                             else if (trialAverage < 250) "YOUR REFLEX IS GOOD"
@@ -720,6 +786,7 @@ fun ReactionView() {
                         style = headerStyle
                     )
 
+                    // Image based on result
                     Image (
                         painter = if (trialAverage < 180) painterResource(R.drawable.best)
                             else if (trialAverage < 250) painterResource(R.drawable.good)
@@ -728,16 +795,19 @@ fun ReactionView() {
                         contentDescription = "Image"
                     )
 
+                    // Average time text
                     Text(
                         text = "Average: ${trialAverage}ms",
                         style = normalStyle
                     )
 
+                    // Subtitle - click prompt
                     Text(
                         text = "Click to Start New Test",
                         style = normalStyle
                     )
 
+                    // Background for time records
                     Box (
                         modifier = Modifier
                             .padding(horizontal = 12.dp)
@@ -753,35 +823,44 @@ fun ReactionView() {
                             ),
                     ) {
 
+                        // Layout for time records
                         Column(
                             modifier = Modifier
                                 .padding(all = 20.dp),
                             horizontalAlignment = Alignment.CenterHorizontally,
                             verticalArrangement = Arrangement.spacedBy(12.dp)
                         ) {
+
+                            // Title
                             Text(
                                 text = "Trial Results",
                                 color = finalBlue,
                                 style = header2Style
                             )
 
+                            // All the times
                             Row(
                                 modifier = Modifier
                                     .fillMaxWidth(),
                                 horizontalArrangement = Arrangement.SpaceEvenly
                             ) {
+
+                                // Using loop so it can display multiple times, even >3
                                 var counter = 0
                                 for (trialTime in trialResults) {
+                                    // Layout per trial
                                     Column (
                                         //modifier = Modifier.fillMaxWidth(),
                                         horizontalAlignment = Alignment.CenterHorizontally
                                     ) {
+                                        // Trial #
                                         Text(
                                             text = "${counter + 1}",
                                             style = header3Style,
                                             color = finalGreen
                                         )
 
+                                        // Trial Time
                                         Text(
                                             text = "${trialTime}ms",
                                             style = normalStyle,
@@ -814,18 +893,8 @@ fun ReactionView() {
     }
 }
 
-
-
 @Preview (showSystemUi = true, showBackground = true)
 @Composable
 fun ReactionPreview() {
     ReactionView()
 }
-
-
-
-/* ==============================
-========== FUNCTIONS ==========
-============================== */
-
-
